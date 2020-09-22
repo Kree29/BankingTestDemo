@@ -1,5 +1,8 @@
 package bankflow.stepdefination;
 
+import java.io.FileNotFoundException;
+
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import bankingtest.pages.*;
@@ -8,6 +11,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class CustomerProfile extends BaseDriver{
+	String id;
 	@Given("I have access to webpage")
 	public void i_have_access_to_webpage() throws InterruptedException {
 		System.setProperty("webdriver.chrome.driver", "/Users/allocen27/WebDriver/chromedriver");
@@ -22,8 +26,8 @@ public class CustomerProfile extends BaseDriver{
 		System.out.println("Going");
 		LoginPage lp = new LoginPage();
 
-		lp.UserId().sendKeys("mngr281424");
-		lp.Password().sendKeys("eserEjy");
+		lp.UserId().sendKeys("mngr285832");
+		lp.Password().sendKeys("vyvArAv");
 		lp.LogIn().click();
 		Thread.sleep(4000);
 		
@@ -47,7 +51,7 @@ public class CustomerProfile extends BaseDriver{
 		NewCustomerPage nc = new NewCustomerPage();
 		Thread.sleep(5000);
 		System.out.println("customer page");
-		nc.CustomerName().sendKeys("Krishna");
+		nc.CustomerName().sendKeys("Krish");
 		nc.Gender().click();
 		nc.DOB().sendKeys("0019920629");
 		nc.Address().sendKeys("Canada");
@@ -55,29 +59,24 @@ public class CustomerProfile extends BaseDriver{
 		nc.State().sendKeys("Ontario");
 		nc.Pin().sendKeys("123456");
 		nc.MNum().sendKeys("123456");
-		nc.Email().sendKeys("kree4@gmail.com");
+		nc.Email().sendKeys("ki6985@gmail.com");
 		nc.Password().sendKeys("abc123");
 		nc.Submit().click();
 	    
 	}
 
 	@Then("new customer will be created, and customer Id will be provided")
-	public void new_customer_will_be_created_and_customer_id_will_be_provided() {
+	public void new_customer_will_be_created_and_customer_id_will_be_provided() throws FileNotFoundException {
+		NewCustomerPage nc = new NewCustomerPage();
+		ReturnProperties().setProperty("id",nc.CustomerID().getText());
+		//id = nc.CustomerID().getText();	
 		
-		System.out.println("fetch Customerid");
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
 	}
-
-
-
-
 
 
 @Given("I have CustomerId")
 public void i_have_customer_id() {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+	System.out.println("fetch Customerid - " +id);
 }
 
 @When("I click on Edit Customer, I will be directed to Edit Customer page")
@@ -88,16 +87,22 @@ public void i_click_on_edit_customer_i_will_be_directed_to_edit_customer_page() 
     
 
 @When("I pass {string} and click on submit")
-public void i_pass_and_click_on_submit(String string) {
-    // Write code here that turns the phrase above into concrete actions
+public void i_pass_and_click_on_submit(String string) throws InterruptedException, FileNotFoundException {
 	EditCustomerPage Ec = new EditCustomerPage();
-	Ec.Edit().sendKeys("xxx");
+	//Ec.Edit().sendKeys(ReturnProperties().getProperty("id"));
+	Ec.Edit().sendKeys("33977");
 	Ec.Submit().click();
+	Thread.sleep(2000);
 }
 
 @Then("I can Edit Customer details")
-public void i_can_edit_customer_details() {
-    // Write code here that turns the phrase above into concrete actions
+public void i_can_edit_customer_details() throws InterruptedException {
+	EditCustomerPage Ec = new EditCustomerPage();
+	Ec.EditAdd().clear();
+	Ec.EditAdd().sendKeys("US");
+	Thread.sleep(2000);
+
+	Ec.FinalSub().click();
 	
 }
 
@@ -110,8 +115,14 @@ public void i_click_on_delete_customer_i_will_be_directed_to_delete_cutomer_page
 @Then("I can Delete Customer")
 public void i_can_delete_customer() {
     DeleteCustomerPage Dc = new DeleteCustomerPage();
-    Dc.Delete().sendKeys("xxx");
-    Dc.Submit();
+    Dc.Delete().sendKeys("33977");
+    Dc.DSubmit().click();
+    Alert alert = driver.switchTo().alert();
+    driver.switchTo().alert().accept();
+    Dc.DSubmit().click();
+
+
+    
 }
 
 

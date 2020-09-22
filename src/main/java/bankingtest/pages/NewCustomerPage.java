@@ -48,6 +48,9 @@ public class NewCustomerPage {
 		return BaseDriver.getDriver().findElement(By.name("sub"));
 		
 	}
+	public WebElement CustomerID() {
+		return BaseDriver.getDriver().findElement(By.xpath("//*[@id='customer']//tr[4]//td[2]"));
+	}
 	
 
 

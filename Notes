@@ -16,3 +16,8 @@ Page Object Model
 BDD 
 Maven 
 Cucumber
+
+
+//*[@id="customer"]/tbody/tr[4]/td[2]
+
+$x("//*[@id='customer']//tr[4]//td[2]")

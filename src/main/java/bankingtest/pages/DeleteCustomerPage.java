@@ -8,7 +8,7 @@ public class DeleteCustomerPage {
 		return BaseDriver.getDriver().findElement(By.name("cusid"));
 		
 	}
-	public WebElement Submit() {
+	public WebElement DSubmit() {
 		return BaseDriver.getDriver().findElement(By.name("AccSubmit"));
 	}
 		

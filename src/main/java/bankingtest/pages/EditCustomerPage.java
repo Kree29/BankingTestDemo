@@ -12,5 +12,18 @@ public class EditCustomerPage {
 		return BaseDriver.getDriver().findElement(By.name("AccSubmit"));
 	
 	}
+	public WebElement EditName() {
+		return BaseDriver.getDriver().findElement(By.name("name"));
+			
+	}
+	public WebElement EditAdd() {
+		return BaseDriver.getDriver().findElement(By.name("addr"));
+		
+	}
+	public WebElement FinalSub() {
+		return BaseDriver.getDriver().findElement(By.name("sub"));
+		
+	}
+	
 
 }
